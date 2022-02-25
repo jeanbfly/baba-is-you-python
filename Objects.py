@@ -1,4 +1,5 @@
 class Objects:
+	# Le constructeur de base de chaque objet
     def __init__(self, x, y, description, direction=0):
         self.x = x
         self.y = y
@@ -11,7 +12,7 @@ class Objects:
         m = "%s coordonnées: %d %d et direction %s" % (self.description, self.x, self.y, d)
         
         return m
-    
+    # Permet de dire explicitement la direction du d'un élément
     def direction_letters(self):
         if self.dir == 0:
             d = "droite"
@@ -24,6 +25,7 @@ class Objects:
         return d
 
 class Materials(Objects):
+	# Je pense qu'on peut écrire moins mais je n'ai pas réussi
     def __init__(self, x, y, description, properties=[], direction=0):
         self.x = x
         self.y = y
@@ -41,7 +43,7 @@ class Materials(Objects):
         return m
 
 class Texts(Objects):
-    pass
+    pass # Le constructeur Objects est le même
 
 
 

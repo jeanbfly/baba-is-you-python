@@ -5,7 +5,7 @@ wall 2 0
 is 0 1
 is 1 1
 wall 2 1
-text_goop 7 1
+text_goop 6 1
 is 8 1
 sink 9 1
 grass 14 1
@@ -108,7 +108,7 @@ wall 2 14
 flag 3 14
 goop 4 14
 goop 5 14
-wall 12 14
+wall 15 14
 wall 2 15
 wall 3 15
 wall 4 15

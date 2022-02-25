@@ -3,6 +3,7 @@ from Objects import *
 class Plateau:
 
     def __init__(self, filee):
+        # Lire le fichier niveau
         with open(filee) as fichier:
             dimensions = fichier.readline().strip()
             mid = dimensions.find(" ")
@@ -12,9 +13,11 @@ class Plateau:
             self.plate = [[[0] for a in range(self.width)] for i in range(self.height)]
             ajouts = fichier.readlines()
             
+            # Liste pour différiencer les matériaux est les textes
             materials = "baba, wall, rock, flag, metal, grass, water, lava"
             #letters = "text_baba, text_wall, text_rock, text_flag, text_water, text_grass, text_lava, stop, push, you, win, best, sink, is"
             
+            # Remplir la matrice avec les références de chaque objet
             for i in ajouts:
                 description, x, y = i.split()
                 x = int(x)
@@ -25,7 +28,9 @@ class Plateau:
                 else:
                     self.plate[y][x] = Texts(x, y, description)
     
+    # Renvoie un emojis en fonction de la description d'un objet
     def image(self, objects):
+        m = ""
         if objects.description == "baba":
             m = "😀"
         elif objects.description == "flag":
@@ -36,8 +41,12 @@ class Plateau:
             m = "🪨 "
         elif objects.description == "metal": # c'est comme si il n'y avait rien
             m = "0️ "
+        elif objects.description == "goop":
+            m = "🌊"
         elif objects.description == "grass":
-            m = "🌿 "
+            m = "🌿"
+        elif objects.description == "lava":
+            m = "🌋"
         elif objects.description == "text_baba":
             m = "🇧 "
         elif objects.description == "text_flag":
@@ -48,25 +57,32 @@ class Plateau:
             m = "🇷 "
         elif objects.description == "text_grass":
             m = "🇬 "
-        elif objects.description == "text_water":
+        elif objects.description == "text_goop":
             m = "🇴 "
+        elif objects.description == "text_best":
+            m = "🇦 "
+        elif objects.description == "text_lava":
+            m = "🇱 "
         elif objects.description == "is":
             m = "✔️ "
         elif objects.description == "stop":
-            m = "🇨 "
+            m = "⛔"#🛑
         elif objects.description == "push":
-            m = "🇩 "
+            m = "💪"
         elif objects.description == "you":
-            m = "🇯 "
+            m = "👇"
         elif objects.description == "win":
-            m = "🇰 "
+            m = "🎆"
         elif objects.description == "best":
-            m = "🇻 "
+            m = "✨ "
         elif objects.description == "sink":
-            m = "🇦 "
+            m = "🚰"
+        elif objects.description == "kill":
+            m = "☠️ "
         
         return m
     
+    # Affiche la matrice
     def __str__(self):
         res = "\n"
         for x in self.plate:
