@@ -1,2 +1,2 @@
-# baba-is-you
-dépôt distant pour le projet Baba Is You
+# baba-is-you-python
+dépôt distant pour le projet Baba Is You prototype en python
