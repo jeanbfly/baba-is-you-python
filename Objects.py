@@ -12,6 +12,7 @@ class Objects:
         m = "%s coordonnées: %d %d et direction %s" % (self.description, self.x, self.y, d)
         
         return m
+
     # Permet de dire explicitement la direction du d'un élément
     def direction_letters(self):
         if self.dir == 0:
@@ -42,10 +43,11 @@ class Materials(Objects):
             m += (str(i) + " ")
         return m
 
+    def add_rules(self, rule):
+        self.properties.append(rule)
+
 class Texts(Objects):
     pass # Le constructeur Objects est le même
-
-
 
 
 
