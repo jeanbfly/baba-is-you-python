@@ -1,4 +1,4 @@
-#import sys # Pas utilisé pour le moment
+# bonjour
 from Objects import *
 from Plateau import *
 
