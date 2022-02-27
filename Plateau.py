@@ -94,7 +94,6 @@ class Plateau:
         return res
     
     def findRules(self):
-
         """
         On parcourt toutes la matrice
         On vérifie si on trouve un objet
@@ -106,26 +105,27 @@ class Plateau:
         
         fonction de Adrien :
 
-            for x in range(len(self.plate)):
-                for y in range(len(self.plate[x])):
-                    if isinstance(self.plate[x][y], Objects):
-                        if self.plate[x][y].description == "is":
-                            if 0 < x < len(self.plate)-2:
-                                if isinstance(self.plate[x-1][y], Texts):
-                                    if self.plate[x-1][y].description in self.text_materials:
-                                        if isinstance(self.plate[x+1][y], Texts):
-                                            if self.plate[x+1][y].description in self.text_properties:
-                                                text = self.plate[x-1][y].description + " is " +  self.plate[x+1][y].description
-                                                rules.append(text)
-                            if 0 < y < len(self.plate[x])-2:
-                                if isinstance(self.plate[x][y-1], Texts):
-                                    if self.plate[x][y-1].description in self.text_materials:
-                                        if isinstance(self.plate[x][y+1], Texts):
-                                            if self.plate[x][y+1].description in self.text_properties:
-                                                text = self.plate[x][y-1].description + " is " +  self.plate[x][y+1].description
-                                                rules.append(text)
-        fonction de Jean :
+        for x in range(len(self.plate)):
+            for y in range(len(self.plate[x])):
+                if isinstance(self.plate[x][y], Objects):
+                    if self.plate[x][y].description == "is":
+                        if 0 < x < len(self.plate)-2:
+                            if isinstance(self.plate[x-1][y], Texts):
+                                if self.plate[x-1][y].description in self.text_materials:
+                                    if isinstance(self.plate[x+1][y], Texts):
+                                        if self.plate[x+1][y].description in self.text_properties:
+                                            text = self.plate[x-1][y].description + " is " +  self.plate[x+1][y].description
+                                            rules.append(text)
+                        if 0 < y < len(self.plate[x])-2:
+                            if isinstance(self.plate[x][y-1], Texts):
+                                if self.plate[x][y-1].description in self.text_materials:
+                                    if isinstance(self.plate[x][y+1], Texts):
+                                        if self.plate[x][y+1].description in self.text_properties:
+                                            text = self.plate[x][y-1].description + " is " +  self.plate[x][y+1].description
+                                            rules.append(text)
         """
+        #fonction de Jean :
+        
         rules = []
         for x in range(len(self.plate)):
             for y in range(len(self.plate[0])):
@@ -168,9 +168,60 @@ class Plateau:
 
         la fonction fonctionne si les propriétés sont ajoutées à l'objet (pas le cas actuellement)
         """
+        
+        #fonction de Adrien :
+        win = False
+        you = False
+        for x in range(len(self.plate)):
+            for y in range(len(self.plate[x])):
+                for i in self.plate[x][y]:
+                    if isinstance(i, Materials):
+                        if "you" in i.properties:
+                            you = True
+                        if "win" in i.properties:
+                            win = True
+                    if you and win:
+                        return win
+                    else:
+                        you = False
+                        win = False
+        return False
+        
+        """
+        #fonction de Jean :
         for x in range(len(self.plate)):
             for y in range(len(self.plate[x])):
                 # si la liste comporte deux objects dont le premier comporte you dans ces propriétés et le second win 
                 if len(self.plate[x][y]) >= 2 and "you" in self.plate[x][y][0].properties and "win" in self.plate[x][y][1].properties:
                     return True
         return False
+        """
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

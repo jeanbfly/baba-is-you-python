@@ -1,5 +1,4 @@
 # bonjour
-import sys
 from Objects import *
 from Plateau import *
 
