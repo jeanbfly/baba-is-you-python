@@ -175,15 +175,16 @@ class Plateau:
         for x in range(len(self.plate)):
             for y in range(len(self.plate[x])):
                 for i in self.plate[x][y]:
-                    if "you" in i.properties:
-                        you = True
-                    if "win" in i.properties:
-                        win = True
-                if you and win:
-                    return win
-                else:
-                    you = False
-                    win = False
+                    if isinstance(i, Materials):
+                        if "you" in i.properties:
+                            you = True
+                        if "win" in i.properties:
+                            win = True
+                    if you and win:
+                        return win
+                    else:
+                        you = False
+                        win = False
         return False
         
         """
