@@ -102,29 +102,7 @@ class Plateau:
         Sur chaque axes regarder si on a un text_matériaux à gauche et/ou en haut et un text_properties à droite et/ou en bas
         Créer une chaine avec les trois éléments si ils sont alignés
         Ajouter la chaine à la liste des règles
-        
-        fonction de Adrien :
-
-        for x in range(len(self.plate)):
-            for y in range(len(self.plate[x])):
-                if isinstance(self.plate[x][y], Objects):
-                    if self.plate[x][y].description == "is":
-                        if 0 < x < len(self.plate)-2:
-                            if isinstance(self.plate[x-1][y], Texts):
-                                if self.plate[x-1][y].description in self.text_materials:
-                                    if isinstance(self.plate[x+1][y], Texts):
-                                        if self.plate[x+1][y].description in self.text_properties:
-                                            text = self.plate[x-1][y].description + " is " +  self.plate[x+1][y].description
-                                            rules.append(text)
-                        if 0 < y < len(self.plate[x])-2:
-                            if isinstance(self.plate[x][y-1], Texts):
-                                if self.plate[x][y-1].description in self.text_materials:
-                                    if isinstance(self.plate[x][y+1], Texts):
-                                        if self.plate[x][y+1].description in self.text_properties:
-                                            text = self.plate[x][y-1].description + " is " +  self.plate[x][y+1].description
-                                            rules.append(text)
         """
-        #fonction de Jean :
         
         rules = []
         for x in range(len(self.plate)):
@@ -137,17 +115,18 @@ class Plateau:
                         if len(self.plate[x][y-1]) > 0 and len(self.plate[x][y+1]) > 0 and self.plate[x][y-1][0].description in self.text_materials and self.plate[x][y+1][0].description in self.text_properties:
                             rules.append(self.plate[x][y-1][0].description + " is " +  self.plate[x][y+1][0].description)
         print(rules)
-
+    
     """
     fonction permettant d'ajouter à chaque objet 
     du même type la même propriété
     """
+    # A améliorer
     def add_all(obj, prop):
         for x in range(len(self.plate)):
             for y in range(len(self.plate[0])):
                 if len(self.plate[x][y]) > 0 and self.plate[x][y][0].description == obj.description:
                     self.plate[x][y][0].add_rules(prop)
-
+    
     """ 
     fonction permettant de bouger tous les 
     objets comportant l'argument you
@@ -157,19 +136,11 @@ class Plateau:
 
     def is_win(self):
         """
-        méthode qui vérifie si le joueur à gagner
-        cherche l'object avec la propriété YOU
-        cherche si il y a un autre objet dans la même case
-        si non, pas gagné
-        si oui, l'objet a-t-il une propriété win
-        
-        # méthode vérification global
-        # méthode pour les for
-
-        la fonction fonctionne si les propriétés sont ajoutées à l'objet (pas le cas actuellement)
+        méthode qui regarde à chaque case s'il y a un matériel avec la propriété "you"
+        et un matériel avec la propriété "win"
+        ( Ca peut être le même matériel )
         """
         
-        #fonction de Adrien :
         win = False
         you = False
         for x in range(len(self.plate)):
@@ -186,42 +157,4 @@ class Plateau:
                         you = False
                         win = False
         return False
-        
-        """
-        #fonction de Jean :
-        for x in range(len(self.plate)):
-            for y in range(len(self.plate[x])):
-                # si la liste comporte deux objects dont le premier comporte you dans ces propriétés et le second win 
-                if len(self.plate[x][y]) >= 2 and "you" in self.plate[x][y][0].properties and "win" in self.plate[x][y][1].properties:
-                    return True
-        return False
-        """
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
