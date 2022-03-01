@@ -1,7 +1,7 @@
 from Objects import *
 from Plateau import *
 
-jeu = Plateau("level/level4")
+jeu = Plateau("level/level0")
 print(jeu)
 jeu.findRules()
 
@@ -15,7 +15,7 @@ on print le plateau
 while not jeu.is_win():
     
     input_dir = input("Déplacement: ")
-    """ il faut encore décider comment utiliser move
+
     if input_dir == "d":
         jeu.move("right")
     elif input_dir == "z":
@@ -24,7 +24,6 @@ while not jeu.is_win():
         jeu.move("left")
     elif input_dir == "s":
         jeu.move("down")
-    """
 
     print(jeu)
 

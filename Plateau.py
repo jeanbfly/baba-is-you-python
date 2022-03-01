@@ -103,29 +103,39 @@ class Plateau:
         Créer une chaine avec les trois éléments si ils sont alignés
         Ajouter la chaine à la liste des règles
         """
-        
-        rules = []
         for x in range(len(self.plate)):
             for y in range(len(self.plate[0])):
                 if len(self.plate[x][y]) > 0 and self.plate[x][y][0].description == "is":
+
                     if 0 < x < len(self.plate)-2:
-                        if len(self.plate[x-1][y]) > 0 and len(self.plate[x+1][y]) > 0 and self.plate[x-1][y][0].description in self.text_materials and self.plate[x+1][y][0].description in self.text_properties:
-                            rules.append(self.plate[x-1][y][0].description + " is " +  self.plate[x+1][y][0].description)
+                        if len(self.plate[x-1][y]) > 0 and len(self.plate[x+1][y]) > 0 and self.plate[x-1][y][0].description in self.text_materials:
+
+                            if self.plate[x+1][y][0].description in self.text_properties:
+                                self.add_all(self.plate[x-1][y][0].description, self.plate[x+1][y][0].description)
+
+                            elif self.plate[x+1][y][0].description in self.materials:
+                                self.changeMat(self.plate[x-1][y][0].description, self.plate[x+1][y][0].description)
+
+
                     if 0 < y < len(self.plate[0])-2:
-                        if len(self.plate[x][y-1]) > 0 and len(self.plate[x][y+1]) > 0 and self.plate[x][y-1][0].description in self.text_materials and self.plate[x][y+1][0].description in self.text_properties:
-                            rules.append(self.plate[x][y-1][0].description + " is " +  self.plate[x][y+1][0].description)
-        print(rules)
-    
+                        if len(self.plate[x][y-1]) > 0 and len(self.plate[x][y+1]) > 0 and self.plate[x][y-1][0].description in self.text_materials:
+                            
+                            if self.plate[x][y+1][0].description in self.text_properties:
+                                self.add_all(self.plate[x][y-1][0].description, self.plate[x][y+1][0].description)
+
+                            elif self.plate[x][y+1][0].description in self.materials:
+                                self.changeMat(self.plate[x][y-1][0].description, self.plate[x][y+1][0].description)
+                            
     """
     fonction permettant d'ajouter à chaque objet 
     du même type la même propriété
     """
-    # A améliorer
-    def add_all(obj, prop):
-        for x in range(len(self.plate)):
-            for y in range(len(self.plate[0])):
-                if len(self.plate[x][y]) > 0 and self.plate[x][y][0].description == obj.description:
-                    self.plate[x][y][0].add_rules(prop)
+
+    def changeMat(self, obj, new):
+        pass
+
+    def add_all(self, obj, prop):
+        pass
     
     """ 
     fonction permettant de bouger tous les 
@@ -140,13 +150,13 @@ class Plateau:
             for k in self.plate[i][j]:
                 if isinstance(k, Texts) or isinstance(k, Materials) and "push" in k.properties:
                     return self.can_move(k, x, y)
-            return True
+            return True # move()
         else:
             return False
     
     def findYou(self):
-        pass
-    """
+        return ""
+
     def move(self, direction):
         x = 0
         y = 0
@@ -162,7 +172,7 @@ class Plateau:
         
         # à améliorer car il peut y avoir deux matériaux pour un focus
         # renvoie un type de matériau, (une chaine de caractère)
-        focus = self.findYou():
+        focus = self.findYou()
         
         for i in self.plate:
             for j in i:
@@ -170,14 +180,13 @@ class Plateau:
                     if isinstance(k, Materials) and focus in k.description:
                         if self.can_move(k, x, y):
                             k.setPosition(x, y)
-    """
+
     def is_win(self):
         """
         méthode qui regarde à chaque case s'il y a un matériel avec la propriété "you"
         et un matériel avec la propriété "win"
         ( Ca peut être le même matériel )
         """
-        
         win = False
         you = False
         for x in range(len(self.plate)):
@@ -188,10 +197,10 @@ class Plateau:
                             you = True
                         if "win" in i.properties:
                             win = True
-                    if you and win:
-                        return win
-                    else:
-                        you = False
-                        win = False
+                if you and win:
+                    return win
+                else:
+                    you = False
+                    win = False
         return False
 
