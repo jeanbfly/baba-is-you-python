@@ -1,7 +1,7 @@
 from Objects import *
 from Plateau import *
 
-jeu = Plateau("level/level0")
+jeu = Plateau("level/level4")
 print(jeu)
 jeu.findRules()
 
