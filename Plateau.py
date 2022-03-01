@@ -150,17 +150,26 @@ class Plateau:
             for k in self.plate[i][j]:
                 if isinstance(k, Texts) or isinstance(k, Materials) and "push" in k.properties:
                     return self.can_move(k, x, y)
-            return True # move()
+            return True
         else:
             return False
     
     def findYou(self):
-        return ""
+        focus = []
+        for i in self.plate:
+            for j in i:
+                for k in j:
+                    if isinstance(k, Materials) and "you" in k.properties:
+                        focus.append(k)
+        return focus
+
 
     def move(self, direction):
-        x = 0
+
+        focus = findYou()
         y = 0
-        
+        x = 0
+
         if direction == "right":
             y = 1
         elif direction == "up":
@@ -169,17 +178,9 @@ class Plateau:
             y = -1
         elif direction == "down":
             x = 1
-        
-        # à améliorer car il peut y avoir deux matériaux pour un focus
-        # renvoie un type de matériau, (une chaine de caractère)
-        focus = self.findYou()
-        
-        for i in self.plate:
-            for j in i:
-                for k in j:
-                    if isinstance(k, Materials) and focus in k.description:
-                        if self.can_move(k, x, y):
-                            k.setPosition(x, y)
+
+        for i in focus:
+            self.can_move(i, x, y)
 
     def is_win(self):
         """
