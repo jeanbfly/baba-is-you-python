@@ -135,52 +135,7 @@ class Plateau:
         pass
 
     def add_all(self, obj, prop):
-        pass
-    
-    """ 
-    fonction permettant de bouger tous les 
-    objets comportant l'argument you
-    """
-    def can_move(self, focus, x, y):
-        # on inverse les coordonnées quand on passe de la vrai position à la matrice
-        i = focus.getY() +x
-        j = focus.getX() +y
         
-        if 0 < i < len(self.plate) and 0 < j < len(self.plate[i]):
-            for k in self.plate[i][j]:
-                if isinstance(k, Texts) or isinstance(k, Materials) and "push" in k.properties:
-                    return self.can_move(k, x, y)
-            return True
-        else:
-            return False
-    
-    def findYou(self):
-        focus = []
-        for i in self.plate:
-            for j in i:
-                for k in j:
-                    if isinstance(k, Materials) and "you" in k.properties:
-                        focus.append(k)
-        return focus
-
-
-    def move(self, direction):
-
-        focus = findYou()
-        y = 0
-        x = 0
-
-        if direction == "right":
-            y = 1
-        elif direction == "up":
-            x = -1
-        elif direction == "left":
-            y = -1
-        elif direction == "down":
-            x = 1
-
-        for i in focus:
-            self.can_move(i, x, y)
 
     def is_win(self):
         """
